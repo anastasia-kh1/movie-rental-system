@@ -135,6 +135,6 @@ module.exports = {
     getMovieById,
     createMovie,
     updateMovie,
-    deleteMovie
+    deleteMovie,
     searchMovies
 };
