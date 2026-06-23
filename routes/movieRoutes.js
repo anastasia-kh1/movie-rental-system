@@ -20,4 +20,6 @@ router.put("/:id", updateMovie);
 
 router.delete("/:id", deleteMovie);
 
+router.get("/search", searchMovies);
+
 module.exports = router;

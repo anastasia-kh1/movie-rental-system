@@ -97,11 +97,44 @@ const deleteMovie = async (req, res) => {
 
     }
 };
+const searchMovies = async (req, res) => {
+    try {
+        const { title, genre, page = 1, limit = 5 } = req.query;
 
+        const query = {};
+
+        if (title) {
+            query.title = { $regex: title, $options: "i" };
+        }
+
+        if (genre) {
+            query.genre = genre;
+        }
+
+        const skip = (page - 1) * limit;
+
+        const movies = await Movie.find(query)
+            .skip(skip)
+            .limit(Number(limit));
+
+        const total = await Movie.countDocuments(query);
+
+        res.json({
+            totalMovies: total,
+            currentPage: Number(page),
+            totalPages: Math.ceil(total / limit),
+            movies
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 module.exports = {
     getAllMovies,
     getMovieById,
     createMovie,
     updateMovie,
     deleteMovie
+    searchMovies
 };

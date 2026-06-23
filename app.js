@@ -5,6 +5,7 @@ const movieRoutes = require("./routes/movieRoutes");
 const userRoutes = require("./routes/userRoutes");
 const rentalRoutes = require("./routes/rentalRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
+const analyticsRoutes = require("./routes/analyticsRoutes");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use("/movies", movieRoutes);
 app.use("/users", userRoutes);
 app.use("/rentals", rentalRoutes);
 app.use("/reviews", reviewRoutes);
+app.use("/analytics", analyticsRoutes);
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
